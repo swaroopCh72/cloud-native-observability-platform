@@ -11,23 +11,23 @@ pipeline{
     }
 
     stages{
-        stage("checkout source"){
-            steps{
-                git branch: 'main',
-                url: "https://github.com/swaroopCh72/cloud-native-observability-platform.git"
-            }
-            post{
-                always{
-                    echo "========always========"
-                }
-                success{
-                    echo "========A executed successfully========"
-                }
-                failure{
-                    echo "========A execution failed========"
-                }
-            }
-        }
+        // stage("checkout source"){
+        //     steps{
+        //         git branch: 'main',
+        //         url: "https://github.com/swaroopCh72/cloud-native-observability-platform.git"
+        //     }
+        //     post{
+        //         always{
+        //             echo "========always========"
+        //         }
+        //         success{
+        //             echo "========A executed successfully========"
+        //         }
+        //         failure{
+        //             echo "========A execution failed========"
+        //         }
+        //     }
+        // }
         stage("Build Image"){
             steps{
                 sh """
