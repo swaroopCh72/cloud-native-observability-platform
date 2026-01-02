@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fastapi
+spec:
+  selector:
+    matchLabels:
+      app: fastapi
+  template:
+    metadata:
+      labels:
+        app: fastapi
+    spec:
+      containers:
+      - name: fastapi
+        image: fastapi-sqlite3:latest
+        imagePullPolicy: IfNotPresent
+
+        env: 
+        - name: DB_PATH
+          valueFrom:
+            configMapKeyRef:
+              name: sqlite-config
+              key: DB_PATH
+        - name: APP_ENV
+          valueFrom:
+            secretKeyRef:
+              name: app-secret
+              key: APP_ENV
+        
+        volumeMounts:
+        - name: sqlite-storage
+          mountPath: /data
+
+        ports:
+        - containerPort: 8000
+
+      volumes:
+      - name: sqlite-storage
+        persistentVolumeClaim:
+          claimName: sqlite-pvc
