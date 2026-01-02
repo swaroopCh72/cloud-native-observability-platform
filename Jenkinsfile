@@ -1,6 +1,10 @@
 pipeline{
     agent any
 
+    options{
+        skipDefaultCheckout(true)
+    }
+
     environment{
         IMAGE_NAME = "swaroopch72/cloud-native-observability-platform"
         IMAGE_TAG = "${BUILD_NUMBER}"
@@ -11,23 +15,23 @@ pipeline{
     }
 
     stages{
-        // stage("checkout source"){
-        //     steps{
-        //         git branch: 'main',
-        //         url: "https://github.com/swaroopCh72/cloud-native-observability-platform.git"
-        //     }
-        //     post{
-        //         always{
-        //             echo "========always========"
-        //         }
-        //         success{
-        //             echo "========A executed successfully========"
-        //         }
-        //         failure{
-        //             echo "========A execution failed========"
-        //         }
-        //     }
-        // }
+        stage("checkout source"){
+            steps{
+                git branch: 'main',
+                url: "https://github.com/swaroopCh72/cloud-native-observability-platform.git"
+            }
+            post{
+                always{
+                    echo "========always========"
+                }
+                success{
+                    echo "========A executed successfully========"
+                }
+                failure{
+                    echo "========A execution failed========"
+                }
+            }
+        }
         stage("Build Image"){
             steps{
                 sh """
