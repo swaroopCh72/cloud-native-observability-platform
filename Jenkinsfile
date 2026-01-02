@@ -17,8 +17,9 @@ pipeline{
     stages{
         stage("checkout source"){
             steps{
-                git branch: 'main',
-                url: "https://github.com/swaroopCh72/cloud-native-observability-platform.git"
+                // git branch: 'main',
+                // url: "https://github.com/swaroopCh72/cloud-native-observability-platform.git"
+                checkout scm
             }
             post{
                 always{
